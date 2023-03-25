@@ -28,13 +28,16 @@ refs.gallery.innerHTML = onMarkupGallery(galleryItems);
 refs.gallery.addEventListener("click", onGalleryClick);
 
 function onGalleryClick(e) {
+  if (e.target.nodeName !== "IMG") {
+    return;
+  }
   e.preventDefault();
 
   basicLightbox
     .create(
       `<img class="gallery__image"
-            src="${e.target.dataset.source}"
-            alt="${e.target.getAttribute("alt")}"/>`
+              src="${e.target.dataset.source}"
+              alt="${e.target.getAttribute("alt")}"/>`
     )
     .show();
   // document.addEventListener("keydown", onModalEscClose);
