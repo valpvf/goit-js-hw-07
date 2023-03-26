@@ -49,7 +49,7 @@ function onGalleryClick(e) {
 
 function onModalEscClose(e) {
   if (e.code === "Escape") {
-    console.log(document.querySelector(".basicLightbox").remove());
+    document.querySelector(".basicLightbox").remove();
     document.removeEventListener("keydown", onModalEscClose);
   }
 }
