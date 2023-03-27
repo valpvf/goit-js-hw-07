@@ -4,9 +4,13 @@ import { galleryItems } from "./gallery-items.js";
 const refs = {
   gallery: document.querySelector(".gallery"),
 };
-// console.log(refs.gallery);
 
-const onCreateImg = ({ preview, original, description }) => {
+refs.gallery.insertAdjacentHTML(
+  "beforeend",
+  onMarkupGallery(galleryItems)
+);
+
+function onCreateImg({ preview, original, description }) {
   return `
     <li class="gallery__item">
         <a class="gallery__link" href="${original}">
@@ -14,12 +18,12 @@ const onCreateImg = ({ preview, original, description }) => {
         </a>
     </li>
     `;
-};
+}
 
-const onMarkupGallery = (galleryItems) =>
-  galleryItems.map(onCreateImg).join("");
-
-refs.gallery.innerHTML = onMarkupGallery(galleryItems);
+function onMarkupGallery(galleryItems) {
+  return galleryItems.map(onCreateImg).join("");
+  
+}
 
 let lightbox = new SimpleLightbox(".gallery a", {
   captions: true,

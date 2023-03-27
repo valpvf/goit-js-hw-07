@@ -5,10 +5,18 @@ const refs = {
   gallery: document.querySelector(".gallery"),
 };
 
-const onMarkupGallery = (galleryItems) =>
-  galleryItems.map(onCreateImg).join("");
+refs.gallery.addEventListener("click", onGalleryClick);
 
-const onCreateImg = ({ preview, original, description }) => {
+refs.gallery.insertAdjacentHTML(
+  "afterbegin",
+  onMarkupGallery(galleryItems)
+);
+
+function onMarkupGallery(galleryItems) {
+  return galleryItems.map(onCreateImg).join("");
+}
+
+function onCreateImg({ preview, original, description }) {
   return `
     <li class="gallery__item">
         <a class="gallery__link" href="${original}">
@@ -21,19 +29,12 @@ const onCreateImg = ({ preview, original, description }) => {
         </a>
     </li>
     `;
-};
-
-refs.gallery.insertAdjacentHTML(
-  "afterbegin",
-  onMarkupGallery(galleryItems)
-);
-
-refs.gallery.addEventListener("click", onGalleryClick);
+}
 
 function onGalleryClick(e) {
   e.preventDefault();
 
-  if (e.target.nodeName !== "IMG") {
+  if (e.target === e.currentTarget) {
     return;
   }
 
